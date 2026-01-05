@@ -1,0 +1,17 @@
+- name: install cart
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: docker
+
+- name: start a container
+  community.docker.docker_container:
+    name: user
+    image: public.ecr.aws/w8x4g9h7/roboshop-v3/user
+    state: started
+    restart: true
+    ports:
+      - "8080:8080"
+    env:
+      MONGO: true
+      MONGO_URL: "mongodb://mongodb-dev.sandeepkumar0088.online:27017/users"
+      REDIS_URL: "redis://redis-dev.sandeepkumar0088.online:6379"

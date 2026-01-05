@@ -1,0 +1,16 @@
+- name: install cart
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: docker
+
+- name: start a container
+  community.docker.docker_container:
+    name: shipping
+    image: public.ecr.aws/w8x4g9h7/roboshop-v3/shipping
+    state: started
+    restart: true
+    ports:
+      - "8080:8080"
+    env:
+      CART_ENDPOINT: "cart-dev.sandeepkumar0088.online:8080"
+      DB_HOST: mysql-dev.sandeepkumar0088.online
