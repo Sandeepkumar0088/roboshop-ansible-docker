@@ -2,8 +2,6 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: docker
-- name: install dependencies
-  ansible.builtin.shell: sudo pip3.13 install requests
 
 - name: start a container
   community.docker.docker_container:
