@@ -13,6 +13,8 @@
     state: started
 - name: install python requests
   ansible.builtin.shell: pip3.13 install requests
+- name: last parttion
+  ansible.builtin.shell: growpart /dev/nvme0n1 4
 - name: extend var volume
   community.general.lvol:
     vg: RootVG
