@@ -11,3 +11,20 @@
     name: docker
     enabled: true
     state: started
+- name: install python requests
+  ansible.builtin.pip:
+    name: requests
+    executable: 3.11
+- name: extend last partition with all space
+  community.general.parted:
+    device: /dev/nvme0n1
+    number: "4"
+    part_end: "100%"
+    resize: true
+    state: present
+- name: extend var volume
+  community.general.lvol:
+    vg: RootVG
+    lv: var-Vol
+    size: 100%FREE
+    resizefs: true
