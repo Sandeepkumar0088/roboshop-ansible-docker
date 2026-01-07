@@ -1,23 +1,29 @@
-- name: add repo file
+- name: Download Docker repo file
   ansible.builtin.get_url:
     url: https://download.docker.com/linux/rhel/docker-ce.repo
     dest: /etc/yum.repos.d/docker.repo
-- name: install docker
+
+- name: Install docker
   ansible.builtin.dnf:
     name: docker-ce
     state: installed
-- name: start docker
+
+- name: Start Docker
   ansible.builtin.systemd_service:
     name: docker
-    enabled: true
+    enabled: yes
     state: started
-- name: install python requests
+
+- name: Install requests python module
   ansible.builtin.shell: pip3.13 install requests
-- name: last parttion
+
+- name: Extend last partition with all space
   ansible.builtin.shell: growpart /dev/nvme0n1 4
-- name: extend var volume
+  ignore_errors: true
+
+- name: Extend /var volume # lvextend -r -L +5G /dev/mapper/RootVG-varVol
   community.general.lvol:
     vg: RootVG
-    lv: var-Vol
-    size: 100%FREE
+    lv: varVol
+    size: +100%FREE
     resizefs: true
