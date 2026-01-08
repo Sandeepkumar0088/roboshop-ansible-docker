@@ -16,7 +16,7 @@
 
 
 - name: Install ansible
-  ansible.builtin.shell: pip3.11 install ansible ; sudo dnf update openssl openssh-server openssh-clients -y ;  sudo systemctl restart sshd ; pip3.11 install requests
+  ansible.builtin.shell: dnf install python3.11-pip -y ; pip3.11 install ansible ; sudo dnf update openssl openssh-server openssh-clients -y ;  sudo systemctl restart sshd ; pip3.11 install requests
 
 
 - name: Extend last partition with all space
