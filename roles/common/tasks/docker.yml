@@ -15,7 +15,7 @@
     state: started
 
 - name: Install requests python module
-  ansible.builtin.shell: pip3.11 install requests
+  ansible.builtin.shell: pip3.13 install requests
 
 - name: Extend last partition with all space
   ansible.builtin.shell: growpart /dev/nvme0n1 4
